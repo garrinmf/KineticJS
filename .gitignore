@@ -2,6 +2,7 @@ jsdoc-toolkit
 jsdoc-master
 dist
 tests/js/unitTests.js
+tests/output
 analysis
 node_modules
 
@@ -28,6 +29,7 @@ Thumbs.db
 nbproject
 *.sublime-project
 *.sublime-workspace
+*.iml
 
 # Dreamweaver added files
 _notes
@@ -44,4 +46,3 @@ dwsync.xml
 intermediate
 publish
 .idea
-

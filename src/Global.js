@@ -256,13 +256,20 @@ var Kinetic = {};
 // can remove the `root` use and the passing `this` as the first arg to
 // the top function.
 
+
+
 // if the module has no dependencies, the above pattern can be simplified to
 ( function(root, factory) {
     if( typeof exports === 'object') {
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
-        module.exports = factory();
+        module.exports = function(win) {
+            window = win || window;
+            Kinetic.setupRequestAnimFrame();
+            document = window.document;
+            return factory();
+        };
     }
     else if( typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -279,3 +286,48 @@ var Kinetic = {};
     // can return a function as the exported value.
     return Kinetic;
 }));
+
+if (typeof window === 'undefined' && typeof require !== 'undefined') {
+    Kinetic.createCanvas = function() {
+        // Merge a DOM (jsdom or browser DOM) node with a node-canvas implementation
+        var canvas = document.createElement('canvas');
+        canvas.impl = new Canvas();
+        for (var key in canvas.impl) {
+            (function(k){
+                if (k === 'undefined' || k === 'toString') return;
+                if (typeof canvas.impl[k] === 'function') {
+                    canvas[k] = function() {
+                        return canvas.impl[k].apply(canvas.impl, arguments);
+                    }
+                }
+                else {
+                    canvas.__defineSetter__(k, function(val) {canvas.impl[k] = val;});
+                    canvas.__defineGetter__(k, function() {return canvas.impl[k];});
+                }
+            })(key);
+        }
+        canvas.__defineGetter__
+        canvas.style = canvas.style || {};
+        return canvas;
+    }
+}
+else {
+    Kinetic.createCanvas = function() {
+        return document.createElement('canvas');
+    }
+};
+Kinetic.setupRequestAnimFrame = function() {
+    if (typeof window !== 'undefined') {
+        Kinetic.requestAnimFrame = (function(callback) {
+            return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+            function(callback) {
+                window.setTimeout(callback, 1000 / 60);
+            };
+        })();
+    }
+    else {
+        Kinetic.requestAnimFrame = function(callback) {setTimeout(callback, 1000 / 60)};
+    }
+}
+
+Kinetic.setupRequestAnimFrame();

@@ -42,7 +42,7 @@
     Kinetic.TextPath.prototype = {
         ___init: function(config) {
             var that = this;
-            this.dummyCanvas = document.createElement('canvas');
+            this.dummyCanvas = Kinetic.createCanvas();
             this.dataArray = [];
 
             // call super constructor

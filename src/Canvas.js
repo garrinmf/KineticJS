@@ -1,6 +1,6 @@
 (function() {
     // calculate pixel ratio
-    var canvas = document.createElement('canvas'),
+    var canvas = Kinetic.createCanvas(),
         context = canvas.getContext('2d'),
         devicePixelRatio = window.devicePixelRatio || 1,
         backingStoreRatio = context.webkitBackingStorePixelRatio
@@ -32,7 +32,7 @@
                 contextType = config.contextType || '2d';
 
             this.pixelRatio = pixelRatio;
-            this.element = document.createElement('canvas');
+            this.element = Kinetic.createCanvas();
 
             // set inline styles
             this.element.style.padding = 0;

@@ -8,7 +8,7 @@ Test.Modules.DD = {
             draggable: true
         });
 
-        var top = stage.content.getBoundingClientRect().top;
+        var top = stage.content.getBoundingClientRect ? stage.content.getBoundingClientRect().top : {top: 0, left: 0};
 
         var layer = new Kinetic.Layer();
 
@@ -91,7 +91,7 @@ Test.Modules.DD = {
             height: 200
         });
 
-        var top = stage.content.getBoundingClientRect().top;
+        var top = stage.content.getBoundingClientRect ? stage.content.getBoundingClientRect().top : {top: 0, left: 0};
 
         var layer = new Kinetic.Layer();
 
@@ -166,7 +166,7 @@ Test.Modules.DD = {
         layer.add(greenCircle);
         stage.add(layer);
 
-        var top = stage.content.getBoundingClientRect().top;
+        var top = stage.content.getBoundingClientRect ? stage.content.getBoundingClientRect().top : {top: 0, left: 0};
 
         var dragStart = false;
         var dragMove = false;
@@ -300,7 +300,7 @@ Test.Modules.DD = {
         layer.add(greenCircle);
         stage.add(layer);
 
-        var top = stage.content.getBoundingClientRect().top;
+        var top = stage.content.getBoundingClientRect ? stage.content.getBoundingClientRect().top : {top: 0, left: 0};
 
 
         var dragEnd = false;
@@ -373,7 +373,7 @@ Test.Modules.DD = {
         layer.add(circle);
         stage.add(layer);
 
-        var top = stage.content.getBoundingClientRect().top,
+        var top = stage.content.getBoundingClientRect ? stage.content.getBoundingClientRect().top : {top: 0, left: 0},
             clicked = false;
 
         circle.on('click', function() {
@@ -446,7 +446,7 @@ Test.Modules.DD = {
         layer.add(circle);
         stage.add(layer);
 
-        var top = stage.content.getBoundingClientRect().top;
+        var top = stage.content.getBoundingClientRect ? stage.content.getBoundingClientRect().top : {top: 0, left: 0};
 
         /*
          * simulate drag and drop
@@ -511,7 +511,7 @@ Test.Modules.DD = {
 
         stage.add(layer);
 
-        var top = stage.content.getBoundingClientRect().top;
+        var top = stage.content.getBoundingClientRect ? stage.content.getBoundingClientRect().top : {top: 0, left: 0};
 
         /*
          * simulate drag and drop
@@ -638,7 +638,7 @@ Test.Modules.EVENT = {
         layer.add(greenCircle);
 
         stage.add(layer);
-        var top = stage.content.getBoundingClientRect().top;
+        var top = stage.content.getBoundingClientRect ? stage.content.getBoundingClientRect().top : {top: 0, left: 0};
 
         showHit(layer);
 
@@ -719,7 +719,7 @@ Test.Modules.EVENT = {
         layer.add(text);
         stage.add(layer);
 
-        var top = stage.content.getBoundingClientRect().top;
+        var top = stage.content.getBoundingClientRect ? stage.content.getBoundingClientRect().top : {top: 0, left: 0};
 
         showHit(layer);
 
@@ -777,7 +777,7 @@ Test.Modules.EVENT = {
         layer.add(circle);
         stage.add(layer);
 
-        var top = stage.content.getBoundingClientRect().top;
+        var top = stage.content.getBoundingClientRect ? stage.content.getBoundingClientRect().top : {top: 0, left: 0};
 
         test(circle.getFill() === 'red', 'circle fill should be red');
         test(circle.getStroke() === 'black', 'circle stroke should be black');
@@ -901,7 +901,7 @@ Test.Modules.EVENT = {
         layer.add(circle);
         stage.add(layer);
 
-        var top = stage.content.getBoundingClientRect().top;
+        var top = stage.content.getBoundingClientRect ? stage.content.getBoundingClientRect().top : {top: 0, left: 0};
 
         // move mouse to center of circle to trigger mouseover
         stage._mousemove({
@@ -1126,7 +1126,7 @@ Test.Modules.EVENT = {
         layer.add(group);
         stage.add(layer);
 
-        var top = stage.content.getBoundingClientRect().top;
+        var top = stage.content.getBoundingClientRect ? stage.content.getBoundingClientRect().top : {top: 0, left: 0};
 
         var groupMousedowns = 0;
         var greenCircleMousedowns = 0;
@@ -1246,7 +1246,7 @@ Test.Modules.EVENT = {
         layer.add(group);
         stage.add(layer);
 
-        var top = stage.content.getBoundingClientRect().top;
+        var top = stage.content.getBoundingClientRect ? stage.content.getBoundingClientRect().top : {top: 0, left: 0};
 
         // move mouse outside of circles
         stage._mousemove({
@@ -1365,7 +1365,7 @@ Test.Modules.EVENT = {
         layer.add(group2);
         stage.add(layer);
 
-        var top = stage.content.getBoundingClientRect().top;
+        var top = stage.content.getBoundingClientRect ? stage.content.getBoundingClientRect().top : {top: 0, left: 0};
 
         // events array
         var e = [];
@@ -1432,7 +1432,7 @@ Test.Modules['HIT FUNCS'] = {
         layer.add(circle);
         stage.add(layer);
 
-        var top = stage.content.getBoundingClientRect().top;
+        var top = stage.content.getBoundingClientRect ? stage.content.getBoundingClientRect().top : {top: 0, left: 0};
 
         var mouseovers = 0;
         var mouseouts = 0;
