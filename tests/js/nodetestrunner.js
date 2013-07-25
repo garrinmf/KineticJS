@@ -3,21 +3,25 @@
 // This file should be executed with `node nodetestrunner.js`.
 
 var fs = require('fs');
+var Canvas = require('canvas'); // if canvas is available, jsdom will automatically use it for creating canvas elements
 var jsdom = require('jsdom');
 var mkdirp = require('mkdirp'); // mkdir -p, but in node.js!
 
-document = jsdom.jsdom("<html><head></head><body></body></html>");
-window = document.createWindow();
+// setup Canvas classes needed by Kinetic
+Image = Canvas.Image;
+Image.prototype.nodeType = 1;
+
+document = jsdom.jsdom("<html><head></head><body><div id='test'></div></body></html>");
+window = document.parentWindow;
 
 var Kinetic = require('../../dist/kinetic-v0.0.0')(window);
-var Canvas = require('canvas');
-Image = Canvas.Image;
+
 eval(fs.readFileSync(__dirname + '/../assets/worldMap.js', "utf8"));
 eval(fs.readFileSync(__dirname + '/../assets/tiger.js', "utf8"));
 eval(fs.readFileSync(__dirname + "/Test.js", "utf8"));
 test = function (condition, message) {
     if(!condition) {
-        console.error("\nERROR!!!!!!!!! " + message + "\n");
+        console.error("\nERROR! --- " + message + "\n");
     }
 }
 

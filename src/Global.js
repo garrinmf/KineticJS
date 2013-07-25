@@ -290,25 +290,7 @@ var Kinetic = {};
 if (typeof window === 'undefined' && typeof require !== 'undefined') {
     Kinetic.createCanvas = function() {
         // Merge a DOM (jsdom or browser DOM) node with a node-canvas implementation
-        var canvas = document.createElement('canvas');
-        canvas.impl = new Canvas();
-        for (var key in canvas.impl) {
-            (function(k){
-                if (k === 'undefined' || k === 'toString') return;
-                if (typeof canvas.impl[k] === 'function') {
-                    canvas[k] = function() {
-                        return canvas.impl[k].apply(canvas.impl, arguments);
-                    }
-                }
-                else {
-                    canvas.__defineSetter__(k, function(val) {canvas.impl[k] = val;});
-                    canvas.__defineGetter__(k, function() {return canvas.impl[k];});
-                }
-            })(key);
-        }
-        canvas.__defineGetter__
-        canvas.style = canvas.style || {};
-        return canvas;
+        return document.createElement('canvas');
     }
 }
 else {
